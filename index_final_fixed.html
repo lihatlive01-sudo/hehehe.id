@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kumpulan video lucu terbaik - hehehe.id">
+    <title>hehehe.id - Video Lucu Terbaik</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            --border-color: #dadce0;
+            --border-color-dark: #5f6368;
+            --hover-bg: #e8e8e8;
+            --link-color: #1a0dab;
+            --video-bg: #000;
+            --active-tab: #1a73e8;
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #e8e8e8;
+            --text-secondary: #b3b3b3;
+            --border-color: #3d3d3d;
+            --border-color-dark: #4a4a4a;
+            --hover-bg: #3d3d3d;
+            --link-color: #8ab4f8;
+            --video-bg: #000;
+            --active-tab: #8ab4f8;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .header-wrapper {
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            white-space: nowrap;
+        }
+        
+        .main-navigation {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+        
+        .nav-link {
+            padding: 8px 16px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        
+        .nav-link:hover {
+            background: var(--hover-bg);
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .theme-toggle {
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--hover-bg);
+        }
+        
+        .advertise-btn {
+            padding: 10px 24px;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.3s;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #FFA07A);
+            background-size: 300% 300%;
+            animation: gradientShift 3s ease infinite;
+            box-shadow: 0 2px 8px rgba(255,107,107,0.3);
+            white-space: nowrap;
+        }
+        
+        .advertise-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,107,107,0.4);
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .post-container {
+            max-width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .video-content-wrapper {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+            max-width: 1400px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .left-ads {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .right-ads {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .ad-square {
+            width: 300px;
+            height: 250px;
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        @media (min-width: 1200px) {
+            .left-ads, .right-ads {
+                display: flex;
+            }
+        }
+        
+        .video-center {
+            flex: 1;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .top-ad-section {
+            width: 100%;
+            max-width: 728px;
+            margin: 0 auto 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .ad-horizontal {
+            width: 728px;
+            height: 90px;
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        
+        .marquee-container {
+            width: 100%;
+            max-width: 728px;
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            overflow: hidden;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marqueeScroll 15s linear infinite;
+            color: #856404;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        @keyframes marqueeScroll {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        .video-wrapper {
+            position: relative;
+            background: var(--video-bg);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        @media (min-width: 768px) {
+            .video-wrapper {
+                max-height: 85vh;
+            }
+            
+            .video-player {
+                max-height: 85vh;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .video-player video,
+            .video-player iframe {
+                max-height: 85vh;
+                width: auto !important;
+                height: auto !important;
+                max-width: 100%;
+                margin: 0 auto;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .video-wrapper {
+                width: 100%;
+                min-height: auto;
+            }
+            
+            .video-player video,
+            .video-player iframe {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+        
+        .video-player {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-player video {
+            display: block;
+        }
+        
+        .video-player iframe {
+            border: none;
+            display: block;
+        }
+        
+        /* IKLAN HORIZONTAL - JARAK BERDEKATAN */
+        .ads-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 15px 0;
+            width: 100%;
+            align-items: center;
+        }
+        
+        .ad-horizontal-bottom {
+            width: 728px;
+            height: 90px;
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 13px;
+            text-align: center;
+            border-radius: 4px;
+        }
+        
+        .loading-message {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        .collection-header {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        
+        .collection-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .collection-subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            padding: 0 20px;
+        }
+        
+        .tab-btn {
+            padding: 12px 24px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .tab-btn:hover {
+            background: var(--hover-bg);
+        }
+        
+        .tab-btn.active {
+            background: var(--active-tab);
+            color: white;
+            border-color: var(--active-tab);
+        }
+        
+        [data-theme="dark"] .tab-btn.active {
+            color: #1a1a1a;
+        }
+        
+        .next-video-btn {
+            padding: 12px 32px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .next-video-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .footer-wrapper {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+        
+        .footer-links {
+            margin-top: 10px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header-wrapper {
+                padding: 15px 20px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .logo {
+                font-size: 24px;
+                text-align: center;
+                order: 1;
+            }
+            
+            .main-navigation {
+                order: 2;
+                justify-content: center;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+            
+            .nav-link {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+            
+            .header-right {
+                order: 3;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .post-container {
+                margin: 20px auto;
+            }
+            
+            .ad-horizontal,
+            .ad-horizontal-bottom {
+                width: 100%;
+                max-width: 100%;
+                height: 70px;
+                font-size: 12px;
+            }
+            
+            .top-ad-section {
+                max-width: 100%;
+            }
+            
+            .marquee-container {
+                max-width: 100%;
+            }
+            
+            .advertise-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            
+            .collection-title {
+                font-size: 24px;
+            }
+            
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-wrapper">
+        <a class="logo" href="/">hehehe.id</a>
+        
+        <nav class="main-navigation">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="#" onclick="showCollectionPage(); return false;">Koleksi Video</a>
+        </nav>
+        
+        <div class="header-right">
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+            <a class="advertise-btn" href="/pasang-iklan.html">Pasang Iklan</a>
+        </div>
+    </div>
+
+    <!-- Homepage Video Section -->
+    <div id="homepageSection">
+        <article class="post-container" id="homepageVideo">
+            <div class="loading-message">Memuat video...</div>
+        </article>
+    </div>
+    
+    <!-- Collection Page (Hidden by default) -->
+    <div id="collectionPage" style="display:none;">
+        <article class="post-container">
+            <div class="collection-header">
+                <h1 class="collection-title">🎬 Koleksi Video Lucu</h1>
+                <p class="collection-subtitle">Pilih kategori favorit Anda dan nikmati video-video terbaik!</p>
+            </div>
+            
+            <div class="category-tabs">
+                <button class="tab-btn active" data-category="bapak-core">
+                    👨 Bapak-Bapak Core
+                </button>
+                <button class="tab-btn" data-category="arab-kocak">
+                    🕌 Arab Kocak
+                </button>
+                <button class="tab-btn" data-category="funny-people">
+                    😂 Funny People
+                </button>
+            </div>
+            
+            <div class="video-content-wrapper">
+                <div class="left-ads">
+                    <div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>
+                    <div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>
+                    <div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>
+                </div>
+                
+                <div class="video-center">
+                    <div class="top-ad-section">
+                        <div class="ad-horizontal">Slot Iklan Tersedia<br/>Hubungi Kami</div>
+                    </div>
+                    
+                    <div id="collectionVideoContainer">
+                        <div class="loading-message">Pilih kategori untuk memulai...</div>
+                    </div>
+                    
+                    <!-- 3 Iklan Horizontal Berdekatan -->
+                    <div class="ads-group">
+                        <div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>
+                        <div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>
+                        <div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>
+                    </div>
+                </div>
+                
+                <div class="right-ads">
+                    <div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>
+                    <div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>
+                    <div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div class="footer-wrapper">
+        <div>Copyright © <span id="year"></span> hehehe.id</div>
+        <div class="footer-links">
+            <a href="/terms.html">Terms of Service</a>
+            <a href="/report.html">Report Abuse</a>
+        </div>
+    </div>
+
+    <script>
+        // ===== KONFIGURASI GIST URLS - GANTI DENGAN URL ANDA =====
+        const HOMEPAGE_PLAYLIST = 'https://gist.githubusercontent.com/lihatlive01-sudo/5e3ba9c9392793aa815941cdec58459c/raw/2d4d8745d4246cb68f2f1dd64c05a8191f5be352/playlist.txt';
+        
+        const COLLECTION_GIST_URLS = {
+            'bapak-core': 'https://gist.githubusercontent.com/lihatlive01-sudo/3aaa2daa010f96676a96e601ad194a86/raw/09b36d9f4df588e732d1b27b91458cba6748e42b/halaman%25202',
+            'arab-kocak': 'https://gist.githubusercontent.com/lihatlive01-sudo/869721f437c8b3e0ba6651625ff46a02/raw/68dfc9563a9496a9e7d5fd1d5b1efc3a3a4707f6/halaman%25201',
+            'funny-people': 'https://gist.githubusercontent.com/lihatlive01-sudo/5e3ba9c9392793aa815941cdec58459c/raw/2d4d8745d4246cb68f2f1dd64c05a8191f5be352/playlist.txt'
+        };
+        // ==========================================================
+        
+        // Set year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        let isCollectionPageVisible = false;
+
+        // Theme Toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Load saved theme
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('themeToggle');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                if (themeToggle) themeToggle.textContent = '☀️';
+            }
+        })();
+
+        // Load homepage video on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            
+            if (hash && hash.startsWith('#play-')) {
+                const category = hash.replace('#play-', '');
+                const playlistData = sessionStorage.getItem('currentPlaylist');
+                
+                if (playlistData && sessionStorage.getItem('currentCategory') === category) {
+                    const videoUrls = JSON.parse(playlistData);
+                    const randomIndex = Math.floor(Math.random() * videoUrls.length);
+                    const randomVideoUrl = videoUrls[randomIndex].trim();
+                    renderHomepageVideo(randomVideoUrl, videoUrls, category);
+                    history.replaceState(null, null, ' ');
+                } else {
+                    const gistUrl = COLLECTION_GIST_URLS[category];
+                    if (gistUrl) {
+                        loadPlaylistAndPlay(gistUrl, category);
+                    }
+                }
+            } else {
+                loadHomepageVideo();
+            }
+            
+            setupCollectionTabs();
+        });
+
+        function loadHomepageVideo() {
+            fetch(HOMEPAGE_PLAYLIST)
+                .then(response => response.text())
+                .then(data => {
+                    const videoUrls = data.split('\n').filter(url => url.trim() !== '');
+                    
+                    if (videoUrls.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * videoUrls.length);
+                        const randomVideoUrl = videoUrls[randomIndex].trim();
+                        renderHomepageVideo(randomVideoUrl);
+                    } else {
+                        document.getElementById('homepageVideo').innerHTML = '<div class="loading-message">Tidak ada video tersedia</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading playlist:', error);
+                    document.getElementById('homepageVideo').innerHTML = '<div class="loading-message">Gagal memuat video</div>';
+                });
+        }
+
+        function loadPlaylistAndPlay(gistUrl, category) {
+            fetch(gistUrl)
+                .then(response => response.text())
+                .then(data => {
+                    const videoUrls = data.split('\n').filter(url => url.trim() !== '');
+                    if (videoUrls.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * videoUrls.length);
+                        const randomVideoUrl = videoUrls[randomIndex].trim();
+                        
+                        sessionStorage.setItem('currentPlaylist', JSON.stringify(videoUrls));
+                        sessionStorage.setItem('currentCategory', category);
+                        
+                        renderHomepageVideo(randomVideoUrl, videoUrls, category);
+                        history.replaceState(null, null, ' ');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading playlist:', error);
+                    document.getElementById('homepageVideo').innerHTML = '<div class="loading-message">Gagal memuat video</div>';
+                });
+        }
+
+        function renderHomepageVideo(videoUrl, playlist, category) {
+            const container = document.getElementById('homepageVideo');
+            if (!container) return;
+            
+            const iframeRegex = /<iframe[^>]*src=["']([^"']+)["'][^>]*>/i;
+            const iframeMatch = videoUrl.match(iframeRegex);
+            
+            let videoHtml = '';
+            
+            videoHtml += '<div class="video-content-wrapper">';
+            
+            // Left Ads
+            videoHtml += '<div class="left-ads">' +
+                '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
+                '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
+                '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
+                '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
+                '</div>';
+            
+            videoHtml += '<div class="video-center">';
+            
+            // Top Ad
+            videoHtml += '<div class="top-ad-section">' +
+                '<div class="ad-horizontal">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
+                '</div>';
+            
+            // 3 Iklan Horizontal ATAS (Berdekatan)
+            videoHtml += '<div class="ads-group">' +
+                '<div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>' +
+                '<div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>' +
+                '<div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>' +
+                '</div>';
+            
+            // Marquee warning
+            videoHtml += '<div class="marquee-container" style="margin-bottom: 10px;">' +
+                '<div class="marquee-text">⚠️';
+            
+            if (category) {
+                videoHtml += ' Sedang memutar: ' + getCollectionCategoryName(category) + ' (Random Mode) ';
+            } else {
+                videoHtml += ' Lihatlah video dalam jarak aman mata ';
+            }
+            
+            videoHtml += '⚠️</div></div>';
+            
+            // Video Player
+            if (iframeMatch || videoUrl.includes('iframe')) {
+                const src = iframeMatch ? iframeMatch[1] : videoUrl;
+                videoHtml += '<div class="video-wrapper">' +
+                    '<div class="video-player">' +
+                    '<iframe src="' + src + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="' + (window.innerWidth > 767 ? 'width:auto; height:85vh; aspect-ratio:16/9;' : 'width:100%; aspect-ratio:16/9;') + '"></iframe>' +
+                    '</div>' +
+                    '</div>';
+            } else {
+                videoHtml += '<div class="video-wrapper">' +
+                    '<div class="video-player">' +
+                    '<video controls controlsList="nodownload" style="' + (window.innerWidth > 767 ? 'max-height:85vh; width:auto; max-width:100%;' : 'width:100%; height:auto;') + '">' +
+                    '<source src="' + videoUrl + '" type="video/mp4">' +
+                    'Your browser does not support the video tag.' +
+                    '</video>' +
+                    '</div>' +
+                    '</div>';
+            }
+            
+            // 3 Iklan Horizontal BAWAH (Berdekatan)
+            videoHtml += '<div class="ads-group">' +
+                '<div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>' +
+                '<div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>' +
+                '<div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>' +
+                '</div>';
+            
+            // Next Video Button
+            videoHtml += '<div style="text-align: center; margin: 20px 0;">' +
+                '<button onclick="playNextRandomVideoFromHomepage()" class="next-video-btn">' +
+                '🔀 Video Random Berikutnya</button>' +
+                '</div>';
+            
+            videoHtml += '</div>';
+            
+            // Right Ads
+            videoHtml += '<div class="right-ads">' +
+                '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
+                '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
+                '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
+                '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
+                '</div>';
+            
+            videoHtml += '</div>';
+            
+            container.innerHTML = videoHtml;
+        }
+
+        // Collection Page Functions
+        function showCollectionPage() {
+            document.getElementById('homepageSection').style.display = 'none';
+            document.getElementById('collectionPage').style.display = 'block';
+            isCollectionPageVisible = true;
+            window.scrollTo(0, 0);
+        }
+
+        function hideCollectionPage() {
+            document.getElementById('homepageSection').style.display = 'block';
+            document.getElementById('collectionPage').style.display = 'none';
+            isCollectionPageVisible = false;
+        }
+
+        function setupCollectionTabs() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            
+            tabButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    tabButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    const container = document.getElementById('collectionVideoContainer');
+                    
+                    if (container) {
+                        container.innerHTML = '<div class="loading-message">Memuat video random...</div>';
+                    }
+                    
+                    loadAndRedirectToRandomVideo(category);
+                });
+            });
+        }
+
+        function loadAndRedirectToRandomVideo(category) {
+            const gistUrl = COLLECTION_GIST_URLS[category];
+            
+            fetch(gistUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.text();
+                })
+                .then(data => {
+                    const videoUrls = data.split('\n').filter(url => url.trim() !== '');
+                    
+                    if (videoUrls.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * videoUrls.length);
+                        const randomVideoUrl = videoUrls[randomIndex].trim();
+                        
+                        sessionStorage.setItem('currentPlaylist', JSON.stringify(videoUrls));
+                        sessionStorage.setItem('currentCategory', category);
+                        sessionStorage.setItem('playlistMode', 'true');
+                        
+                        hideCollectionPage();
+                        renderHomepageVideo(randomVideoUrl, videoUrls, category);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    } else {
+                        alert('Tidak ada video tersedia di kategori ini');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading videos:', error);
+                    alert('Gagal memuat video. Coba lagi!');
+                });
+        }
+
+        function playNextRandomVideo() {
+            const playlistData = sessionStorage.getItem('currentPlaylist');
+            const category = sessionStorage.getItem('currentCategory');
+            
+            if (!playlistData) {
+                alert('Playlist tidak ditemukan. Silakan pilih kategori lagi.');
+                return;
+            }
+            
+            const playlist = JSON.parse(playlistData);
+            const randomIndex = Math.floor(Math.random() * playlist.length);
+            const randomVideoUrl = playlist[randomIndex].trim();
+            
+            renderHomepageVideo(randomVideoUrl, playlist, category);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function playNextRandomVideoFromHomepage() {
+            const playlistData = sessionStorage.getItem('currentPlaylist');
+            const category = sessionStorage.getItem('currentCategory');
+            
+            if (playlistData && category) {
+                playNextRandomVideo();
+            } else {
+                fetch(HOMEPAGE_PLAYLIST)
+                    .then(response => response.text())
+                    .then(data => {
+                        const videoUrls = data.split('\n').filter(url => url.trim() !== '');
+                        
+                        if (videoUrls.length > 0) {
+                            const randomIndex = Math.floor(Math.random() * videoUrls.length);
+                            const randomVideoUrl = videoUrls[randomIndex].trim();
+                            renderHomepageVideo(randomVideoUrl);
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading playlist:', error);
+                        alert('Gagal memuat video');
+                    });
+            }
+        }
+
+        function getCollectionCategoryName(category) {
+            const names = {
+                'bapak-core': 'Bapak-Bapak Core',
+                'arab-kocak': 'Arab Kocak',
+                'funny-people': 'Funny People'
+            };
+            return names[category] || category;
+        }
+    </script>
+</body>
+</html>

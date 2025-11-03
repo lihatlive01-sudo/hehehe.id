@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Abuse - hehehe.id</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            --border-color: #dadce0;
+            --hover-bg: #e8e8e8;
+            --accent-color: #d93025;
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #e8e8e8;
+            --text-secondary: #b3b3b3;
+            --border-color: #3d3d3d;
+            --hover-bg: #3d3d3d;
+            --accent-color: #f28b82;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .header-wrapper {
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+        }
+        
+        .theme-toggle {
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--hover-bg);
+        }
+        
+        .content-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+        
+        .page-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        .card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        .card p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .card ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .card li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+        
+        .report-types {
+            display: grid;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .report-type {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+        }
+        
+        .report-type h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        
+        .report-type p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .contact-section {
+            text-align: center;
+            padding: 30px;
+            background: var(--accent-color);
+            border-radius: 12px;
+            color: white;
+            margin-top: 40px;
+        }
+        
+        .contact-section h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        
+        .contact-section p {
+            font-size: 16px;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: white;
+            color: var(--accent-color);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.3s;
+            margin: 5px;
+        }
+        
+        .contact-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .alert-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            color: #856404;
+        }
+        
+        .alert-box strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .footer-wrapper {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-wrapper {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-wrapper">
+        <a class="logo" href="/">hehehe.id</a>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    </div>
+
+    <div class="content-wrapper">
+        <h1 class="page-title">🚨 Laporkan Konten Bermasalah</h1>
+        <p class="page-subtitle">Kami berkomitmen untuk menjaga keamanan dan kenyamanan semua pengguna kami.</p>
+        
+        <div class="alert-box">
+            <strong>⚠️ Peringatan Penting:</strong>
+            Laporan palsu atau tidak berdasar dapat dikenakan sanksi. Pastikan laporan Anda valid dan disertai dengan bukti yang memadai.
+        </div>
+        
+        <div class="card">
+            <h2>Jenis Konten yang Dapat Dilaporkan</h2>
+            
+            <div class="report-types">
+                <div class="report-type">
+                    <h3>🔞 Konten Tidak Pantas</h3>
+                    <p>Konten yang mengandung pornografi, kekerasan eksplisit, atau materi dewasa lainnya yang melanggar kebijakan kami.</p>
+                </div>
+                
+                <div class="report-type">
+                    <h3>⚖️ Pelanggaran Hak Cipta</h3>
+                    <p>Konten yang melanggar hak kekayaan intelektual Anda atau pihak lain tanpa izin.</p>
+                </div>
+                
+                <div class="report-type">
+                    <h3>🚫 Ujaran Kebencian</h3>
+                    <p>Konten yang mempromosikan kebencian, diskriminasi, atau kekerasan terhadap individu atau kelompok tertentu.</p>
+                </div>
+                
+                <div class="report-type">
+                    <h3>💢 Pelecehan atau Bullying</h3>
+                    <p>Konten yang berisi pelecehan, intimidasi, atau ancaman terhadap individu.</p>
+                </div>
+                
+                <div class="report-type">
+                    <h3>🎭 Spam atau Scam</h3>
+                    <p>Konten yang bersifat spam, penipuan, atau phishing.</p>
+                </div>
+                
+                <div class="report-type">
+                    <h3>👤 Privasi</h3>
+                    <p>Konten yang membocorkan informasi pribadi seseorang tanpa izin.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>📋 Informasi yang Perlu Disertakan</h2>
+            <p>Untuk memproses laporan Anda dengan lebih efektif, mohon sertakan informasi berikut:</p>
+            <ul>
+                <li><strong>URL/Link konten:</strong> Alamat lengkap halaman yang bermasalah</li>
+                <li><strong>Deskripsi masalah:</strong> Jelaskan secara detail apa masalahnya</li>
+                <li><strong>Screenshot (jika perlu):</strong> Bukti visual dapat membantu proses verifikasi</li>
+                <li><strong>Informasi kontak:</strong> Email atau nomor telepon untuk kami hubungi jika diperlukan</li>
+                <li><strong>Bukti kepemilikan:</strong> Khusus untuk klaim hak cipta, sertakan bukti bahwa Anda adalah pemilik konten</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h2>⏱️ Proses Pelaporan</h2>
+            <p>Setelah menerima laporan Anda, kami akan:</p>
+            <ol style="margin-left: 20px; color: var(--text-secondary);">
+                <li style="margin-bottom: 10px;">Meninjau laporan dalam waktu 24-48 jam kerja</li>
+                <li style="margin-bottom: 10px;">Melakukan investigasi terhadap konten yang dilaporkan</li>
+                <li style="margin-bottom: 10px;">Mengambil tindakan yang sesuai jika ditemukan pelanggaran</li>
+                <li style="margin-bottom: 10px;">Mengirim konfirmasi hasil investigasi ke email Anda</li>
+            </ol>
+            <p style="margin-top: 15px;"><strong>Catatan:</strong> Kami akan merahasiakan identitas pelapor kecuali diwajibkan oleh hukum.</p>
+        </div>
+        
+        <div class="contact-section">
+            <h2>Kirim Laporan Anda</h2>
+            <p>Hubungi kami melalui salah satu channel berikut untuk melaporkan konten bermasalah:</p>
+            <a href="mailto:report@hehehe.id?subject=Laporan%20Konten%20Bermasalah" class="contact-btn">📧 Email: report@hehehe.id</a>
+            <a href="https://wa.me/6281234567890?text=Saya%20ingin%20melaporkan%20konten%20bermasalah" class="contact-btn" target="_blank">📱 WhatsApp</a>
+        </div>
+    </div>
+
+    <div class="footer-wrapper">
+        <div>Copyright © <span id="year"></span> hehehe.id</div>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('themeToggle');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                if (themeToggle) themeToggle.textContent = '☀️';
+            }
+        })();
+    </script>
+</body>
+</html>

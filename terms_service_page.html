@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - hehehe.id</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #202124;
+            --text-secondary: #5f6368;
+            --border-color: #dadce0;
+            --hover-bg: #e8e8e8;
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #2d2d2d;
+            --text-primary: #e8e8e8;
+            --text-secondary: #b3b3b3;
+            --border-color: #3d3d3d;
+            --hover-bg: #3d3d3d;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            transition: background 0.3s, color 0.3s;
+        }
+        
+        .header-wrapper {
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+        }
+        
+        .theme-toggle {
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 4px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            background: var(--hover-bg);
+        }
+        
+        .content-wrapper {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .last-updated {
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            font-size: 14px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+        
+        .section h3 {
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .section p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .section ul, .section ol {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+        
+        .footer-wrapper {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-wrapper {
+                padding: 15px 20px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .page-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-wrapper">
+        <a class="logo" href="/">hehehe.id</a>
+        <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+    </div>
+
+    <div class="content-wrapper">
+        <h1 class="page-title">Terms of Service</h1>
+        <p class="last-updated">Terakhir diperbarui: <span id="updateDate"></span></p>
+        
+        <div class="section">
+            <h2>1. Penerimaan Ketentuan</h2>
+            <p>Dengan mengakses dan menggunakan situs web hehehe.id ("Website"), Anda setuju untuk terikat oleh Ketentuan Layanan ini. Jika Anda tidak setuju dengan ketentuan ini, mohon untuk tidak menggunakan Website kami.</p>
+        </div>
+        
+        <div class="section">
+            <h2>2. Penggunaan Layanan</h2>
+            <h3>2.1 Kelayakan</h3>
+            <p>Anda harus berusia minimal 13 tahun untuk menggunakan Website ini. Dengan menggunakan Website, Anda menyatakan bahwa Anda telah memenuhi persyaratan usia ini.</p>
+            
+            <h3>2.2 Penggunaan yang Diizinkan</h3>
+            <p>Anda setuju untuk menggunakan Website hanya untuk tujuan yang sah dan sesuai dengan:</p>
+            <ul>
+                <li>Semua hukum dan peraturan yang berlaku</li>
+                <li>Ketentuan Layanan ini</li>
+                <li>Norma-norma sosial dan etika yang berlaku</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>3. Konten</h2>
+            <h3>3.1 Konten Website</h3>
+            <p>Semua konten yang ditampilkan di Website, termasuk tetapi tidak terbatas pada video, teks, grafis, dan logo adalah milik hehehe.id atau pemberi lisensi kami dan dilindungi oleh undang-undang hak cipta.</p>
+            
+            <h3>3.2 Penggunaan Konten</h3>
+            <p>Anda tidak diperkenankan untuk:</p>
+            <ul>
+                <li>Mengunduh konten video tanpa izin</li>
+                <li>Mendistribusikan ulang konten tanpa izin tertulis</li>
+                <li>Menggunakan konten untuk tujuan komersial tanpa izin</li>
+                <li>Memodifikasi atau membuat karya turunan dari konten kami</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>4. Larangan Penggunaan</h2>
+            <p>Anda dilarang:</p>
+            <ul>
+                <li>Menggunakan Website untuk tujuan ilegal atau tidak sah</li>
+                <li>Mengganggu atau merusak keamanan Website</li>
+                <li>Menggunakan robot, spider, atau perangkat otomatis lainnya</li>
+                <li>Mencoba mendapatkan akses tidak sah ke sistem kami</li>
+                <li>Mengirimkan virus, malware, atau kode berbahaya lainnya</li>
+                <li>Melakukan spam atau mengirim komunikasi yang tidak diminta</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>5. Disclaimer</h2>
+            <p>Website disediakan "sebagaimana adanya" tanpa jaminan dalam bentuk apapun, baik tersurat maupun tersirat. Kami tidak menjamin bahwa:</p>
+            <ul>
+                <li>Website akan selalu tersedia atau bebas dari kesalahan</li>
+                <li>Konten akan selalu akurat atau terkini</li>
+                <li>Penggunaan Website akan memenuhi kebutuhan Anda</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>6. Batasan Tanggung Jawab</h2>
+            <p>Sejauh diizinkan oleh hukum yang berlaku, hehehe.id tidak bertanggung jawab atas:</p>
+            <ul>
+                <li>Kerugian langsung, tidak langsung, insidental, atau konsekuensial</li>
+                <li>Kehilangan data atau keuntungan yang timbul dari penggunaan Website</li>
+                <li>Gangguan layanan atau kesalahan teknis</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>7. Iklan Pihak Ketiga</h2>
+            <p>Website kami dapat menampilkan iklan dari pihak ketiga. Kami tidak bertanggung jawab atas konten iklan tersebut atau situs web yang ditautkan dari iklan tersebut.</p>
+        </div>
+        
+        <div class="section">
+            <h2>8. Perubahan Ketentuan</h2>
+            <p>Kami berhak untuk mengubah Ketentuan Layanan ini kapan saja. Perubahan akan efektif segera setelah diposting di Website. Penggunaan berkelanjutan dari Website setelah perubahan berarti Anda menerima ketentuan yang diperbarui.</p>
+        </div>
+        
+        <div class="section">
+            <h2>9. Hukum yang Berlaku</h2>
+            <p>Ketentuan Layanan ini diatur oleh dan ditafsirkan sesuai dengan hukum Republik Indonesia. Setiap sengketa yang timbul akan diselesaikan di pengadilan yang berwenang di Indonesia.</p>
+        </div>
+        
+        <div class="section">
+            <h2>10. Kontak</h2>
+            <p>Jika Anda memiliki pertanyaan tentang Ketentuan Layanan ini, silakan hubungi kami di:</p>
+            <p><strong>Email:</strong> legal@hehehe.id</p>
+        </div>
+    </div>
+
+    <div class="footer-wrapper">
+        <div>Copyright © <span id="year"></span> hehehe.id</div>
+    </div>
+
+    <script>
+        const now = new Date();
+        const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+        const dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+        document.getElementById('updateDate').textContent = dateStr;
+        document.getElementById('year').textContent = now.getFullYear();
+        
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('themeToggle');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                if (themeToggle) themeToggle.textContent = '☀️';
+            }
+        })();
+    </script>
+</body>
+</html>
