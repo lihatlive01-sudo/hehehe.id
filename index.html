@@ -596,13 +596,13 @@
 
 <body>
     <!-- Age Verification Modal -->
-    <div class="age-verification-overlay" id="ageVerification">
+    <div class="age-verification-overlay" id="ageVerification" style="display: flex;">
         <div class="age-verification-modal">
             <h2 id="ageTitle">Are you 18 years old or older?</h2>
             <p id="ageDescription">Please be respectful and mindful when accessing this video. Keep your screen and volume at appropriate levels to avoid disturbing others or being in awkward situations.</p>
             <div class="age-verification-buttons">
-                <button class="age-btn age-btn-no" onclick="handleAgeResponse()">Agree</button>
-                <button class="age-btn age-btn-yes" onclick="handleAgeResponse()">Accept</button>
+                <button class="age-btn age-btn-no" id="agreeBtn">Agree</button>
+                <button class="age-btn age-btn-yes" id="acceptBtn">Accept</button>
             </div>
         </div>
     </div>
@@ -700,28 +700,71 @@
             const userLang = navigator.language || navigator.userLanguage;
             const isIndonesian = userLang.toLowerCase().includes('id');
             
+            const agreeBtn = document.getElementById('agreeBtn');
+            const acceptBtn = document.getElementById('acceptBtn');
+            
             if (isIndonesian) {
                 document.getElementById('ageTitle').textContent = 'Apakah kamu berusia 18+ atau lebih?';
                 document.getElementById('ageDescription').textContent = 'Bersiaplah tertawa terbahak-bahak dan terpingkal-pingkal saat menyaksikan video ini. Harap jaga lambung dan kantong anda agar tidak berpindah tempat atau ke tangan orang lain.';
+                if (agreeBtn) agreeBtn.textContent = 'Setuju';
+                if (acceptBtn) acceptBtn.textContent = 'Terima';
             }
         }
 
         // Handle age verification
         function handleAgeResponse() {
-            window.open('https://www.effectivegatecpm.com/vsft88c6?key=2fad6f717c5d155f438ee18cb2aea5cf', '_blank');
+            console.log('Button clicked!'); // Debug
+            const smartlinkUrl = 'https://www.effectivegatecpm.com/vsft88c6?key=2fad6f717c5d155f438ee18cb2aea5cf';
             
-            setTimeout(() => {
-                document.getElementById('ageVerification').style.display = 'none';
+            // Open smartlink in new tab
+            const newWindow = window.open(smartlinkUrl, '_blank');
+            console.log('Window opened:', newWindow); // Debug
+            
+            // Hide modal after short delay
+            setTimeout(function() {
+                const ageModal = document.getElementById('ageVerification');
+                if (ageModal) {
+                    ageModal.style.display = 'none';
+                    console.log('Modal hidden'); // Debug
+                }
                 sessionStorage.setItem('ageVerified', 'true');
             }, 500);
         }
 
+        // Setup event listeners for age verification buttons
+        function setupAgeVerification() {
+            const agreeBtn = document.getElementById('agreeBtn');
+            const acceptBtn = document.getElementById('acceptBtn');
+            
+            if (agreeBtn) {
+                agreeBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Agree button clicked');
+                    handleAgeResponse();
+                });
+            }
+            
+            if (acceptBtn) {
+                acceptBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Accept button clicked');
+                    handleAgeResponse();
+                });
+            }
+        }
+
         // Check if age verification already done
         window.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded'); // Debug
+            
+            setupAgeVerification();
             detectLanguage();
             
             if (sessionStorage.getItem('ageVerified') === 'true') {
-                document.getElementById('ageVerification').style.display = 'none';
+                const ageModal = document.getElementById('ageVerification');
+                if (ageModal) {
+                    ageModal.style.display = 'none';
+                }
             }
             
             const hash = window.location.hash;
