@@ -35,7 +35,6 @@
             --border-color-dark: #4a4a4a;
             --hover-bg: #3d3d3d;
             --link-color: #8ab4f8;
-            --video-bg: #000;
             --active-tab: #8ab4f8;
         }
         
@@ -687,6 +686,9 @@
     </div>
 
     <script>
+        // ===========================
+        // CONFIG
+        // ===========================
         const HOMEPAGE_PLAYLIST = 'https://gist.githubusercontent.com/lihatlive01-sudo/5e3ba9c9392793aa815941cdec58459c/raw/2d4d8745d4246cb68f2f1dd64c05a8191f5be352/playlist.txt';
         
         const COLLECTION_GIST_URLS = {
@@ -695,78 +697,99 @@
             'funny-people': 'https://gist.githubusercontent.com/lihatlive01-sudo/5e3ba9c9392793aa815941cdec58459c/raw/2d4d8745d4246cb68f2f1dd64c05a8191f5be352/playlist.txt'
         };
 
-        // Detect user location and set language
+        const SMARTLINK_URL = 'https://www.effectivegatecpm.com/vsft88c6?key=2fad6f717c5d155f438ee18cb2aea5cf';
+
+        // ===========================
+        // AGE VERIFICATION / LANGUAGE
+        // ===========================
+        // Use sessionStorage to remember verification per browser session
+        let autoRedirectTimer = null;
+        const AUTO_REDIRECT_DELAY = 5000; // ms
+
         function detectLanguage() {
-            const userLang = navigator.language || navigator.userLanguage;
-            const isIndonesian = userLang.toLowerCase().includes('id');
-            
-            const agreeBtn = document.getElementById('agreeBtn');
-            const acceptBtn = document.getElementById('acceptBtn');
-            
+            // Use navigator language and change modal text by ID (more reliable than relying on node order)
+            const userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+            const isIndonesian = userLang.includes('id');
+
+            const ageTitleEl = document.getElementById('ageTitle');
+            const ageDescEl = document.getElementById('ageDescription');
+            const agreeEl = document.getElementById('agreeBtn');
+            const acceptEl = document.getElementById('acceptBtn');
+
             if (isIndonesian) {
-                document.getElementById('ageTitle').textContent = 'Apakah kamu berusia 18+ atau lebih?';
-                document.getElementById('ageDescription').textContent = 'Bersiaplah tertawa terbahak-bahak dan terpingkal-pingkal saat menyaksikan video ini. Harap jaga lambung dan kantong anda agar tidak berpindah tempat atau ke tangan orang lain.';
-                if (agreeBtn) agreeBtn.textContent = 'Setuju';
-                if (acceptBtn) acceptBtn.textContent = 'Terima';
+                if (ageTitleEl) ageTitleEl.textContent = 'Apakah kamu berusia 18 tahun atau lebih?';
+                if (ageDescEl) ageDescEl.textContent = 'Harap bersikap bijak saat mengakses konten ini. Jaga volume dan layar agar tidak mengganggu orang lain.';
+                if (agreeEl) agreeEl.textContent = 'Setuju';
+                if (acceptEl) acceptEl.textContent = 'Terima';
+            } else {
+                if (ageTitleEl) ageTitleEl.textContent = 'Are you 18 years old or older?';
+                if (ageDescEl) ageDescEl.textContent = 'Please be respectful and mindful when accessing this video. Keep your screen and volume at appropriate levels to avoid disturbing others.';
+                if (agreeEl) agreeEl.textContent = 'Agree';
+                if (acceptEl) acceptEl.textContent = 'Accept';
             }
         }
 
-        // Handle age verification
         function handleAgeResponse() {
-            console.log('Button clicked!'); // Debug
-            const smartlinkUrl = 'https://www.effectivegatecpm.com/vsft88c6?key=2fad6f717c5d155f438ee18cb2aea5cf';
-            
-            // Open smartlink in new tab
-            const newWindow = window.open(smartlinkUrl, '_blank');
-            console.log('Window opened:', newWindow); // Debug
-            
-            // Hide modal after short delay
-            setTimeout(function() {
-                const ageModal = document.getElementById('ageVerification');
-                if (ageModal) {
-                    ageModal.style.display = 'none';
-                    console.log('Modal hidden'); // Debug
-                }
-                sessionStorage.setItem('ageVerified', 'true');
-            }, 500);
+            // clear timer if running (prevents duplicate opens)
+            if (autoRedirectTimer) {
+                clearTimeout(autoRedirectTimer);
+                autoRedirectTimer = null;
+            }
+
+            // Open smartlink in new tab (user gesture preferred; may be blocked by popup blockers if from setTimeout)
+            try {
+                window.open(SMARTLINK_URL, '_blank');
+            } catch (e) {
+                console.warn('Could not open smartlink:', e);
+            }
+
+            const ageModal = document.getElementById('ageVerification');
+            if (ageModal) ageModal.style.display = 'none';
+
+            sessionStorage.setItem('ageVerified', 'true');
         }
 
-        // Setup event listeners for age verification buttons
-        function setupAgeVerification() {
+        // ===========================
+        // PAGE INIT
+        // ===========================
+        window.addEventListener('DOMContentLoaded', function() {
+            detectLanguage();
+
+            // If already verified in this session, hide modal
+            const hasVerified = sessionStorage.getItem('ageVerified') === 'true';
+            if (hasVerified) {
+                const ageModal = document.getElementById('ageVerification');
+                if (ageModal) ageModal.style.display = 'none';
+            }
+
+            // Add event listeners to buttons (use IDs for reliability)
             const agreeBtn = document.getElementById('agreeBtn');
             const acceptBtn = document.getElementById('acceptBtn');
-            
-            if (agreeBtn) {
-                agreeBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Agree button clicked');
-                    handleAgeResponse();
-                });
-            }
-            
-            if (acceptBtn) {
-                acceptBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Accept button clicked');
-                    handleAgeResponse();
-                });
-            }
-        }
 
-        // Check if age verification already done
-        window.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded'); // Debug
-            
-            setupAgeVerification();
-            detectLanguage();
-            
-            if (sessionStorage.getItem('ageVerified') === 'true') {
-                const ageModal = document.getElementById('ageVerification');
-                if (ageModal) {
-                    ageModal.style.display = 'none';
-                }
+            if (agreeBtn) agreeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleAgeResponse();
+            });
+
+            if (acceptBtn) acceptBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                handleAgeResponse();
+            });
+
+            // Only start auto-redirect if user hasn't verified yet
+            if (!hasVerified) {
+                // Start timer; if user hasn't clicked in AUTO_REDIRECT_DELAY, then auto-redirect
+                autoRedirectTimer = setTimeout(function() {
+                    // Double-check again in case verification status changed
+                    if (sessionStorage.getItem('ageVerified') !== 'true') {
+                        // Try to open in response to the timer.
+                        // Note: some browsers may block window.open if not initiated by user interaction.
+                        handleAgeResponse();
+                    }
+                }, AUTO_REDIRECT_DELAY);
             }
-            
+
+            // Continue with existing page init logic (hash handling, load homepage, setup tabs)
             const hash = window.location.hash;
             
             if (hash && hash.startsWith('#play-')) {
@@ -791,7 +814,10 @@
             
             setupCollectionTabs();
         });
-        
+
+        // ===========================
+        // OTHER SITE SCRIPTS (kept from original)
+        // ===========================
         document.getElementById('year').textContent = new Date().getFullYear();
         
         let isCollectionPageVisible = false;
@@ -1069,3 +1095,6 @@
             };
             return names[category] || category;
         }
+    </script>
+</body>
+</html>
