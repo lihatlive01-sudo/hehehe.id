@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kumpulan video lucu terbaik - hehehe.id">
-    <title>ww1.intip.me - Vokep</title>
+    <title>hehehe.id - Video Lucu Terbaik</title>
     
     <style>
         * {
@@ -45,6 +45,99 @@
             color: var(--text-primary);
             line-height: 1.6;
             transition: background 0.3s, color 0.3s;
+        }
+
+        /* AGE VERIFICATION MODAL */
+        .age-verification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .age-verification-modal {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .age-verification-modal {
+            background: #2d2d2d;
+        }
+
+        .age-verification-modal h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .age-verification-modal p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .age-verification-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .age-btn {
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+        }
+
+        .age-btn-yes {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .age-btn-yes:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+        }
+
+        .age-btn-no {
+            background: #f44336;
+            color: white;
+        }
+
+        .age-btn-no:hover {
+            background: #da190b;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .age-verification-modal {
+                padding: 30px 20px;
+            }
+
+            .age-verification-modal h2 {
+                font-size: 24px;
+            }
+
+            .age-verification-buttons {
+                flex-direction: column;
+            }
         }
         
         .header-wrapper {
@@ -205,7 +298,8 @@
         }
         
         .ad-horizontal {
-            width: 728px;
+            width: 100%;
+            max-width: 728px;
             height: 90px;
             background: var(--bg-secondary);
             border: 2px dashed var(--border-color);
@@ -231,15 +325,16 @@
         .marquee-text {
             display: inline-block;
             white-space: nowrap;
-            animation: marqueeScroll 15s linear infinite;
+            animation: marqueeScroll 20s linear infinite;
             color: #856404;
             font-size: 14px;
             font-weight: 500;
+            padding-left: 100%;
         }
         
         @keyframes marqueeScroll {
             0% {
-                transform: translateX(100%);
+                transform: translateX(0);
             }
             100% {
                 transform: translateX(-100%);
@@ -292,6 +387,11 @@
                 width: 100% !important;
                 height: auto !important;
             }
+
+            .ad-horizontal {
+                height: 70px;
+                font-size: 12px;
+            }
         }
         
         .video-player {
@@ -311,7 +411,6 @@
             display: block;
         }
         
-        /* IKLAN HORIZONTAL - JARAK BERDEKATAN */
         .ads-group {
             display: flex;
             flex-direction: column;
@@ -322,7 +421,8 @@
         }
         
         .ad-horizontal-bottom {
-            width: 728px;
+            width: 100%;
+            max-width: 728px;
             height: 90px;
             background: var(--bg-secondary);
             border: 2px dashed var(--border-color);
@@ -471,20 +571,9 @@
                 margin: 20px auto;
             }
             
-            .ad-horizontal,
             .ad-horizontal-bottom {
-                width: 100%;
-                max-width: 100%;
                 height: 70px;
                 font-size: 12px;
-            }
-            
-            .top-ad-section {
-                max-width: 100%;
-            }
-            
-            .marquee-container {
-                max-width: 100%;
             }
             
             .advertise-btn {
@@ -505,8 +594,20 @@
 </head>
 
 <body>
+    <!-- Age Verification Modal -->
+    <div class="age-verification-overlay" id="ageVerification">
+        <div class="age-verification-modal">
+            <h2 id="ageTitle">Are you 18 years old or older?</h2>
+            <p id="ageDescription">Please be respectful and mindful when accessing this video. Keep your screen and volume at appropriate levels to avoid disturbing others or being in awkward situations.</p>
+            <div class="age-verification-buttons">
+                <button class="age-btn age-btn-no" onclick="handleAgeResponse()">Agree</button>
+                <button class="age-btn age-btn-yes" onclick="handleAgeResponse()">Accept</button>
+            </div>
+        </div>
+    </div>
+
     <div class="header-wrapper">
-        <a class="logo" href="/">bio.intip.me</a>
+        <a class="logo" href="/">hehehe.id</a>
         
         <nav class="main-navigation">
             <a class="nav-link" href="/">Home</a>
@@ -519,14 +620,12 @@
         </div>
     </div>
 
-    <!-- Homepage Video Section -->
     <div id="homepageSection">
         <article class="post-container" id="homepageVideo">
             <div class="loading-message">Memuat video...</div>
         </article>
     </div>
     
-    <!-- Collection Page (Hidden by default) -->
     <div id="collectionPage" style="display:none;">
         <article class="post-container">
             <div class="collection-header">
@@ -536,10 +635,10 @@
             
             <div class="category-tabs">
                 <button class="tab-btn active" data-category="bapak-core">
-                    🏕️ Eksib
+                    👨 Bapak-Bapak Core
                 </button>
                 <button class="tab-btn" data-category="arab-kocak">
-                    🧕🏻 Hijab
+                    🕌 Arab Kocak
                 </button>
                 <button class="tab-btn" data-category="funny-people">
                     😂 Funny People
@@ -562,7 +661,6 @@
                         <div class="loading-message">Pilih kategori untuk memulai...</div>
                     </div>
                     
-                    <!-- 3 Iklan Horizontal Berdekatan -->
                     <div class="ads-group">
                         <div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>
                         <div class="ad-horizontal-bottom">Slot Iklan Tersedia - Hubungi Kami</div>
@@ -588,7 +686,6 @@
     </div>
 
     <script>
-        // ===== KONFIGURASI GIST URLS - GANTI DENGAN URL ANDA =====
         const HOMEPAGE_PLAYLIST = 'https://gist.githubusercontent.com/lihatlive01-sudo/5e3ba9c9392793aa815941cdec58459c/raw/2d4d8745d4246cb68f2f1dd64c05a8191f5be352/playlist.txt';
         
         const COLLECTION_GIST_URLS = {
@@ -596,42 +693,38 @@
             'arab-kocak': 'https://gist.githubusercontent.com/lihatlive01-sudo/869721f437c8b3e0ba6651625ff46a02/raw/68dfc9563a9496a9e7d5fd1d5b1efc3a3a4707f6/halaman%25201',
             'funny-people': 'https://gist.githubusercontent.com/lihatlive01-sudo/5e3ba9c9392793aa815941cdec58459c/raw/2d4d8745d4246cb68f2f1dd64c05a8191f5be352/playlist.txt'
         };
-        // ==========================================================
-        
-        // Set year in footer
-        document.getElementById('year').textContent = new Date().getFullYear();
-        
-        let isCollectionPageVisible = false;
 
-        // Theme Toggle
-        function toggleTheme() {
-            const html = document.documentElement;
-            const themeToggle = document.getElementById('themeToggle');
-            const currentTheme = html.getAttribute('data-theme');
+        // Detect user location and set language
+        function detectLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const isIndonesian = userLang.toLowerCase().includes('id');
             
-            if (currentTheme === 'dark') {
-                html.removeAttribute('data-theme');
-                themeToggle.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.setAttribute('data-theme', 'dark');
-                themeToggle.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
+            if (isIndonesian) {
+    document.getElementById('ageTitle').textContent = 'Apakah kamu berusia 18+ atau lebih?';
+    document.getElementById('ageDescription').textContent = 'Bersiaplah tertawa terbahak-bahak dan terpingkal-pingkal saat menyaksikan video ini. Harap jaga lambung dan kantong anda agar tidak berpindah tempat atau ke tangan orang lain.';
+    document.querySelectorAll('.age-btn')[0].textContent = 'Setuju';
+    document.querySelectorAll('.age-btn')[1].textContent = 'Terima';
+}
         }
 
-        // Load saved theme
-        (function() {
-            const savedTheme = localStorage.getItem('theme');
-            const themeToggle = document.getElementById('themeToggle');
-            if (savedTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                if (themeToggle) themeToggle.textContent = '☀️';
-            }
-        })();
+        // Handle age verification
+        function handleAgeResponse() {
+            window.open('https://www.effectivegatecpm.com/vsft88c6?key=2fad6f717c5d155f438ee18cb2aea5cf', '_blank');
+            
+            setTimeout(() => {
+                document.getElementById('ageVerification').style.display = 'none';
+                sessionStorage.setItem('ageVerified', 'true');
+            }, 500);
+        }
 
-        // Load homepage video on page load
+        // Check if age verification already done
         window.addEventListener('DOMContentLoaded', function() {
+            detectLanguage();
+            
+            if (sessionStorage.getItem('ageVerified') === 'true') {
+                document.getElementById('ageVerification').style.display = 'none';
+            }
+            
             const hash = window.location.hash;
             
             if (hash && hash.startsWith('#play-')) {
@@ -656,6 +749,35 @@
             
             setupCollectionTabs();
         });
+        
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        let isCollectionPageVisible = false;
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = html.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
+                themeToggle.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeToggle = document.getElementById('themeToggle');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                if (themeToggle) themeToggle.textContent = '☀️';
+            }
+        })();
 
         function loadHomepageVideo() {
             fetch(HOMEPAGE_PLAYLIST)
@@ -710,7 +832,6 @@
             
             videoHtml += '<div class="video-content-wrapper">';
             
-            // Left Ads
             videoHtml += '<div class="left-ads">' +
                 '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
                 '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
@@ -720,7 +841,7 @@
             
             videoHtml += '<div class="video-center">';
             
-            // Top Ad
+            // Top Ad - SELALU TAMPIL DI PC DAN MOBILE
             videoHtml += '<div class="top-ad-section">' +
                 '<div class="ad-horizontal">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
                 '</div>';
@@ -778,7 +899,6 @@
             
             videoHtml += '</div>';
             
-            // Right Ads
             videoHtml += '<div class="right-ads">' +
                 '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
                 '<div class="ad-square">Slot Iklan Tersedia<br/>Hubungi Kami</div>' +
@@ -791,7 +911,6 @@
             container.innerHTML = videoHtml;
         }
 
-        // Collection Page Functions
         function showCollectionPage() {
             document.getElementById('homepageSection').style.display = 'none';
             document.getElementById('collectionPage').style.display = 'block';
@@ -908,6 +1027,3 @@
             };
             return names[category] || category;
         }
-    </script>
-</body>
-</html>
