@@ -107,22 +107,23 @@
         }
 
         .age-btn-yes {
-            background: #4CAF50;
+            background: #000000;
             color: white;
         }
 
         .age-btn-yes:hover {
-            background: #45a049;
+            background: #333333;
             transform: translateY(-2px);
         }
 
         .age-btn-no {
-            background: #f44336;
-            color: white;
+            background: #ffffff;
+            color: #000000;
+            border: 2px solid #000000;
         }
 
         .age-btn-no:hover {
-            background: #da190b;
+            background: #f0f0f0;
             transform: translateY(-2px);
         }
 
@@ -700,11 +701,9 @@
             const isIndonesian = userLang.toLowerCase().includes('id');
             
             if (isIndonesian) {
-    document.getElementById('ageTitle').textContent = 'Apakah kamu berusia 18+ atau lebih?';
-    document.getElementById('ageDescription').textContent = 'Bersiaplah tertawa terbahak-bahak dan terpingkal-pingkal saat menyaksikan video ini. Harap jaga lambung dan kantong anda agar tidak berpindah tempat atau ke tangan orang lain.';
-    document.querySelectorAll('.age-btn')[0].textContent = 'Setuju';
-    document.querySelectorAll('.age-btn')[1].textContent = 'Terima';
-}
+                document.getElementById('ageTitle').textContent = 'Apakah kamu berusia 18+ atau lebih?';
+                document.getElementById('ageDescription').textContent = 'Bersiaplah tertawa terbahak-bahak dan terpingkal-pingkal saat menyaksikan video ini. Harap jaga lambung dan kantong anda agar tidak berpindah tempat atau ke tangan orang lain.';
+            }
         }
 
         // Handle age verification
