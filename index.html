@@ -700,14 +700,14 @@
         const SMARTLINK_URL = 'https://www.effectivegatecpm.com/vsft88c6?key=2fad6f717c5d155f438ee18cb2aea5cf';
 
         // ===========================
-        // AGE VERIFICATION / LANGUAGE
+        // AGE VERIFICATION SYSTEM - MUNCUL SETIAP 3 MENIT
         // ===========================
-        // Use sessionStorage to remember verification per browser session
         let autoRedirectTimer = null;
-        const AUTO_REDIRECT_DELAY = 5000; // ms
+        let modalRecurringTimer = null;
+        const AUTO_REDIRECT_DELAY = 5000; // 5 seconds
+        const MODAL_RECURRING_INTERVAL = 180000; // 3 minutes = 180,000 ms
 
         function detectLanguage() {
-            // Use navigator language and change modal text by ID (more reliable than relying on node order)
             const userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
             const isIndonesian = userLang.includes('id');
 
@@ -729,24 +729,54 @@
             }
         }
 
+        function showAgeModal() {
+            const ageModal = document.getElementById('ageVerification');
+            if (ageModal) {
+                ageModal.style.display = 'flex';
+                
+                // Clear any existing auto-redirect timer
+                if (autoRedirectTimer) {
+                    clearTimeout(autoRedirectTimer);
+                }
+                
+                // Start auto-redirect timer (5 seconds)
+                autoRedirectTimer = setTimeout(function() {
+                    handleAgeResponse();
+                }, AUTO_REDIRECT_DELAY);
+            }
+        }
+
         function handleAgeResponse() {
-            // clear timer if running (prevents duplicate opens)
+            // Clear timer if running
             if (autoRedirectTimer) {
                 clearTimeout(autoRedirectTimer);
                 autoRedirectTimer = null;
             }
 
-            // Open smartlink in new tab (user gesture preferred; may be blocked by popup blockers if from setTimeout)
+            // Open smartlink in new tab
             try {
                 window.open(SMARTLINK_URL, '_blank');
             } catch (e) {
                 console.warn('Could not open smartlink:', e);
             }
 
+            // Hide modal
             const ageModal = document.getElementById('ageVerification');
-            if (ageModal) ageModal.style.display = 'none';
+            if (ageModal) {
+                ageModal.style.display = 'none';
+            }
+        }
 
-            sessionStorage.setItem('ageVerified', 'true');
+        function startRecurringModal() {
+            // Clear any existing recurring timer
+            if (modalRecurringTimer) {
+                clearInterval(modalRecurringTimer);
+            }
+            
+            // Set interval to show modal every 3 minutes
+            modalRecurringTimer = setInterval(function() {
+                showAgeModal();
+            }, MODAL_RECURRING_INTERVAL);
         }
 
         // ===========================
@@ -755,14 +785,13 @@
         window.addEventListener('DOMContentLoaded', function() {
             detectLanguage();
 
-            // If already verified in this session, hide modal
-            const hasVerified = sessionStorage.getItem('ageVerified') === 'true';
-            if (hasVerified) {
-                const ageModal = document.getElementById('ageVerification');
-                if (ageModal) ageModal.style.display = 'none';
-            }
+            // Always show modal on first load
+            showAgeModal();
 
-            // Add event listeners to buttons (use IDs for reliability)
+            // Start recurring timer for every 3 minutes
+            startRecurringModal();
+
+            // Add event listeners to buttons
             const agreeBtn = document.getElementById('agreeBtn');
             const acceptBtn = document.getElementById('acceptBtn');
 
@@ -776,20 +805,7 @@
                 handleAgeResponse();
             });
 
-            // Only start auto-redirect if user hasn't verified yet
-            if (!hasVerified) {
-                // Start timer; if user hasn't clicked in AUTO_REDIRECT_DELAY, then auto-redirect
-                autoRedirectTimer = setTimeout(function() {
-                    // Double-check again in case verification status changed
-                    if (sessionStorage.getItem('ageVerified') !== 'true') {
-                        // Try to open in response to the timer.
-                        // Note: some browsers may block window.open if not initiated by user interaction.
-                        handleAgeResponse();
-                    }
-                }, AUTO_REDIRECT_DELAY);
-            }
-
-            // Continue with existing page init logic (hash handling, load homepage, setup tabs)
+            // Continue with existing page init logic
             const hash = window.location.hash;
             
             if (hash && hash.startsWith('#play-')) {
@@ -816,7 +832,7 @@
         });
 
         // ===========================
-        // OTHER SITE SCRIPTS (kept from original)
+        // OTHER SITE SCRIPTS
         // ===========================
         document.getElementById('year').textContent = new Date().getFullYear();
         
